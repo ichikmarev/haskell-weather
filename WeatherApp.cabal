@@ -19,7 +19,7 @@ executable WeatherApp
   main-is:             Main.hs
   -- other-modules:    aeson
   -- other-extensions:
-  build-depends:       base >=4.11 && <4.12,
+  build-depends:       base >=4.9,
                       aeson,
                       base,
                       base-compat,
