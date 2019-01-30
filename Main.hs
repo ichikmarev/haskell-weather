@@ -40,18 +40,18 @@ instance FromJSON TempPoint
 instance ToJSON TempPoint
 
 jsonURL :: String -> String
-jsonURL q = "http://api.openweathermap.org/data/2.5/weather?q=" ++ q ++ "&units=metric&appid=e7b9dd9f41c3ac26eae9e94536c8075e"
+jsonURL q = "http://api.openweathermap.org/data/2.5/weather?q=" ++ q ++ "&units=metric&appid=e7b9dd9f41c3ac26eae9e94536c8075e&lang=ru"
 
 getJSON :: String -> IO B.ByteString
 getJSON town = simpleHttp (jsonURL town)
 
 main :: IO ()
 main = do
- putStrLn "Hello! Please insert your town >>> \n "
+ putStrLn "Привет! Пожалуйста, введи название своего города >>> \n "
  town <- getLine
- putStrLn ("Your town is: " ++ town ++ "\n")
+ putStrLn ("\nХм, ты ввел город - " ++ town ++ "\nДавай посмотрим, что там за погода")
  d <- (eitherDecode <$> (getJSON town)) :: IO (Either String Temperatures)
  case d of
   Left e -> putStrLn e
-  Right stuff -> putStrLn ("Weather now is: \n" ++ (description (Prelude.head(weather stuff))) ++ "\n\nTempeature now is: " ++ show (temp (test stuff)))
+  Right stuff -> putStrLn ("Сейчас температура в твоем городе " ++ show (temp (test stuff)) ++ " градусов Цельсия \nА на улице – " ++ (description (Prelude.head(weather stuff))))
   -- Right stuff -> print (fmap weather stuff)
