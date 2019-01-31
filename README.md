@@ -1,6 +1,8 @@
-# haskell-weather
-**The study project on Haskell language to take JSON from open weather map API and parse it to user
-Студенческий проект на языке Haskell в в рамках курса "Функциональное программирование" студента гр. 381505 ИИТММ, Чикмарёва Ильи**
+# WeatherApp
+
+**The study project on Haskell language to take JSON from open weather map API and parse it to user**
+
+**Студенческий проект на языке Haskell в в рамках курса "Функциональное программирование" студента гр. 381505 ИИТММ, Чикмарёва Ильи**
 
 WeatherApp
 
