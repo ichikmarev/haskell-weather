@@ -53,7 +53,7 @@ main = do
 
 parseArgs :: [String] -> IO()
 parseArgs [] = getWeather
-parseArgs y@(x:_) = do
+parseArgs (x:_) = do
   case x of
     "--help" -> usage
     "--version" -> version
