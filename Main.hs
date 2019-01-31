@@ -5,6 +5,7 @@
 
 {-# LANGUAGE OverloadedStrings, DeriveGeneric #-}
 
+import System.Environment
 import Data.Aeson as Q
 import Data.Text
 import Control.Applicative
@@ -47,11 +48,59 @@ getJSON town = simpleHttp (jsonURL town)
 
 main :: IO ()
 main = do
+  args <- getArgs
+  parseArgs args
+
+parseArgs :: [String] -> IO()
+parseArgs [] = getWeather
+parseArgs y@(x:_) = do
+  case x of
+    "--help" -> usage
+    "--version" -> version
+    "--list" -> list
+    _ -> getWeather
+
+usage :: IO()
+usage = putStrLn usageStr
+
+usageStr :: String
+usageStr = "Погодный сервис, работающий с базой Openweathermap.\n" ++
+           "Для начала необходимо ввести ваш город на английском или русском языке\n" ++
+           "Более подробнее о выборе городов можно узнать по флагу --list\n" ++
+           "\n Чикмарёв Илья, 381505 гр. ИИТММ, 2018-2019 гг.\n"
+
+version :: IO()
+version = putStrLn versionStr
+
+versionStr :: String
+versionStr = "WeatherApp/1.0.1\n" ++
+             "© 2018-2019"
+
+list :: IO()
+list = putStrLn listStr
+
+listStr :: String
+listStr = "Поисковый сервис, очень гибкий.\n" ++
+          "Запрос может обрабатываться по любому реальному городу на английском или русском языках\n" ++
+          "Введите полное название города или часть.\n" ++
+          "Например: Лон, Лонд, Лондон\n"  ++
+          "Чем более точное название города вы поставите, тем более точный список вы получите.\n" ++
+          "\n" ++
+          "Для уточнения, вы можете поставить после названия или части города запятую, и 2ух буквенный код страны\n" ++
+          "Вы получите название городы в выбранной стране.\n" ++
+          "Например: Лон, UK или Лондон, England\n" ++
+          "\n" ++
+          "Удачи вам!\n"
+
+getWeather :: IO ()
+getWeather = do
  putStrLn "Привет! Пожалуйста, введи название своего города >>> \n "
  town <- getLine
  putStrLn ("\nХм, ты ввел город - " ++ town ++ "\nДавай посмотрим, что там за погода")
  d <- (eitherDecode <$> (getJSON town)) :: IO (Either String Temperatures)
  case d of
-  Left e -> putStrLn e
-  Right stuff -> putStrLn ("Сейчас температура в твоем городе " ++ show (temp (test stuff)) ++ " градусов Цельсия \nА на улице – " ++ (description (Prelude.head(weather stuff))))
+  Left e -> putStrLn ("Произошла ошибка.\n" ++ "Проверьте правильность написания и наличие подключения к интернету")
+  Right stuff -> putStrLn ("Сейчас температура в твоем городе " ++
+                            show (temp (test stuff)) ++ " градусов Цельсия \nА на улице – " ++
+                            (description (Prelude.head(weather stuff))))
   -- Right stuff -> print (fmap weather stuff)
