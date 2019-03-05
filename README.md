@@ -6,11 +6,22 @@
 
 WeatherApp
 
+Проект делает запрос к открытой базе API openweathermap, подставляет запрос и выводит погоду по данному городу. Для работы понадобится интернет соединение.
+
 *Запуск:*
 
 Для первоначальной настройки необходимо иметь предустановленную Haskell Platform. После этого в корневом каталоге выполнить команды:
 
 ```bash
+$ cabal configure
+$ cabal build
+```
+
+Возможны ошибки в загрузках дополнительных модулей, в этому случаее рекомендуется выполнить следующие команды:
+
+```bash
+$ cabal clean
+$ cabal install --only-dependencies
 $ cabal configure
 $ cabal build
 ```
@@ -26,17 +37,17 @@ $ cabal build
 Ключ "--help" служит для инструкции пользователя
 
 ```bash
-  dist/build/TextRPG/TextRPG --help
+  dist/build/WeatherApp/WeatherApp --help
 ```
 
 Ключ "--version" служит для вывода актульной версии сборки и кредитов
 
 ```bash
-  dist/build/TextRPG/TextRPG --version
+  dist/build/WeatherApp/WeatherApp --version
 ```
 
 Ключ "--list" служит для вывода списка городов и модификаций
 
 ```bash
-  dist/build/TextRPG/TextRPG --list
+  dist/build/WeatherApp/WeatherApp --list
 ```
