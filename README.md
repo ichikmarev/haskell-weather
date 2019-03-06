@@ -32,6 +32,18 @@ http-conduit
 
 ```bash
 $ cabal install --only-dependencies
+```
+
+или утсановить каждый покет отдельно:
+
+```bash
+$ cabal install [package name]
+$ cabal install http-conduit
+```
+
+После установки всех зависимостей можно запускать проект:
+
+```bash
 $ cabal configure
 $ cabal build
 ```
