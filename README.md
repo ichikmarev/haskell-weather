@@ -34,7 +34,7 @@ http-conduit
 $ cabal install --only-dependencies
 ```
 
-или утсановить каждый покет отдельно:
+или установить каждый пакет отдельно:
 
 ```bash
 $ cabal install [package name]
