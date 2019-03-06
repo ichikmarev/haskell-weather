@@ -21,10 +21,6 @@ $ cabal build
 
 ```bash
 aeson,
-base,
-base-compat,
-bytestring,
-text,
 http-conduit
 ```
 
